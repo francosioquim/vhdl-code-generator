@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Angular 2 QuickStart Source
 
 This repository holds the TypeScript source code of the [angular.io quickstart](https://angular.io/docs/ts/latest/quickstart.html),
@@ -135,3 +136,9 @@ A custom reporter (see `protractor.config.js`) generates a  `./protractor-result
 which is easier to read; this file is excluded from source control.
 
 Shut it down manually with Ctrl-C.
+=======
+# vhdl-code-generator
+
+1. Easily generate behavioral and structural entities with just few clicks.
+2. Automatically connects entities through signal.
+>>>>>>> f1e6d1ed6976bf9a010f228067599e17f3e77db9
