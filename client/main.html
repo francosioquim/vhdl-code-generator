@@ -1,0 +1,30 @@
+<!-- Simple header with fixed tabs. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+            mdl-layout--fixed-tabs">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title"><a [routerLink]="['VHDLModuleGenerator']">{{pageTitle}}</a></span>
+    </div>
+    <!-- Tabs -->
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+      <a [routerLink]="['EntitiesWorkspace']" class="mdl-layout__tab"
+[class.is-active]="router.isRouteActive(router.generate(['EntitiesWorkspace']))"
+      >Diagram</a>
+      <a [routerLink]="['OutputCode']" class="mdl-layout__tab "
+[class.is-active]="router.isRouteActive(router.generate(['OutputCode']))"
+      >Code</a>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Code Generator</span>
+    <nav class="mdl-navigation">
+      <a [routerLink]="['VHDLModuleGenerator']" class="mdl-navigation__link">Home</a>
+      <a [routerLink]="['EntitiesWorkspace']" class="mdl-navigation__link">Diagram</a>
+      <a [routerLink]="['OutputCode']" class="mdl-navigation__link">Code</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
