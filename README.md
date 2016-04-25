@@ -76,11 +76,11 @@ TBA
 
 ## Need Help ?
 
-https://github.com/rixrix/stencil/issues
+https://github.com/francosioquim/vhdl-code-generator/issues
 
 ## Want to help ?
 
-Pull request https://github.com/rixrix/stencil/pulls
+Pull request https://github.com/francosioquim/vhdl-code-generator/pulls
 
 ## License
 
