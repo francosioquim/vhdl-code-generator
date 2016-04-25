@@ -1,4 +1,8 @@
+import {Port} from './port';
+
 export class Entity {
-	id: number;
 	name: string;
+	architecture: string;
+	parent_name: string;
+	ports: Port[];
 }

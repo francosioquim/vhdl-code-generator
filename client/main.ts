@@ -27,10 +27,10 @@ import {
 } from 'angular2/router';
 import 'material-design-lite';
 
-import {Hero} from './hero';
 import {HomeComponent} from './home/home.component';
 import {EntitiesComponent} from './entities/entities.component';
 import {CodeComponent} from './code/code.component';
+import {EntitiesService} from './entities/entities.service';
 
 
 @Component({
@@ -39,6 +39,9 @@ import {CodeComponent} from './code/code.component';
         ROUTER_DIRECTIVES,
         [EntitiesComponent, HomeComponent, CodeComponent]
         ],
+    providers: [
+        EntitiesService
+    ],
     template: require('./main.html')
 })
 @RouteConfig([
@@ -46,12 +49,12 @@ import {CodeComponent} from './code/code.component';
         path: '/home',
         name: 'VHDLModuleGenerator',
         component: HomeComponent,
-        useAsDefault: true
     },
     {
         path: '/app',
         name: 'EntitiesWorkspace',
-        component: EntitiesComponent
+        component: EntitiesComponent,
+        useAsDefault: true
     },
     {
         path: '/code',
@@ -61,14 +64,9 @@ import {CodeComponent} from './code/code.component';
 ])
 
 export class StencilApp implements AfterViewInit {
-    masterHero: Hero;
     pageTitle = 'VHDL Code Generator';
 
     constructor(private router: Router) {
-        // no-op
-        this.masterHero = { id: 12, name: "bobooy" };
-
-        //this.masterHero.name = "booboy";
     }
     ngAfterViewInit() {
         componentHandler.upgradeAllRegistered();

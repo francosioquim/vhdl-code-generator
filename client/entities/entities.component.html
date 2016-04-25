@@ -1,111 +1,118 @@
 <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
     <div class="page-content">
         <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col">Control Panel</div>
+            <div class="mdl-cell mdl-cell--12-col" [hidden]="showControlPanel">
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored left" (click)="toggleControlPanel()">
+                    <i class="material-icons">add</i>
+                </button>
+            </div>
+            <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" [hidden]="!showControlPanel">
+                <div class="mdl-cell mdl-cell--12-col">
+                    <form action="#">
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--6-col">
+                                <h4>Entity Details</h4>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-20">
+                                    <input type="text" class="mdl-textfield__input" [(ngModel)]="entity.name">
+                                    <label class="mdl-textfield__label" for="sample3">Entity Name</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input type="text" class="mdl-textfield__input" [(ngModel)]="entity.architecture">
+                                    <label class="mdl-textfield__label" for="sample3">Architecture</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <select [(ngModel)]="simpleValue" class="mdl-textfield__input">
+                                        <option *ngFor="#entityopt of entities" [value]="entityopt.name">{{entityopt.name}}</option>
+                                    </select>
+                                    <label class="mdl-textfield__label" for="sample3">Parent Entity</label>
+                                </div>
+                            </div>
+                            <div class="mdl-cell mdl-cell--6-col">
+                                <h4>Ports</h4>
+                                <div class="mdl-cell mdl-cell--12-col left">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-20">
+                                        <input type="text" class="mdl-textfield__input" [(ngModel)]="port.name">
+                                        <label class="mdl-textfield__label" for="sample3">Port Name</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-20">
+                                        <input type="number" class="mdl-textfield__input" [(ngModel)]="port.width" value="1">
+                                        <label class="mdl-textfield__label" for="sample3">Bus</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-20">
+                                        <input type="text" class="mdl-textfield__input" [(ngModel)]="port.direction" value="1">
+                                        <label class="mdl-textfield__label" for="sample3">Direction</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-20">
+                                        <input type="text" class="mdl-textfield__input" [(ngModel)]="port.relation" value="1">
+                                        <label class="mdl-textfield__label" for="sample3">Connection</label>
+                                    </div>
+                                <div class="mdl-layout-spacer"></div>
+                                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored left"
+                                    (click)="addPort()">
+                                        <i class="material-icons">add</i>
+                                    </button>
+                                </div>
+                                <div class="mdl-layout-spacer"></div>
+                                <div class="mdl-cell mdl-cell--12-col left" *ngIf="countPorts() > 0">
+                                    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp top-20">
+                                        <thead>
+                                            <tr>
+                                                <th class="mdl-data-table__cell--non-numeric">Port</th>
+                                                <th>Direction</th>
+                                                <th>Connection</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="#portmap of entity.ports; #portCount = index">
+                                                <td class="mdl-data-table__cell--non-numeric">{{portmap.name}}</td>
+                                                <td >{{portmap.direction}} ({{portmap.width}})</td>
+                                                <td >{{portmap.relation}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdl-layout-spacer"></div>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent right-20" (click)="createEntity()">
+                            Create Entity
+                        </button>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="toggleControlPanel()">
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--3-col">
-                
+            <div class="mdl-cell mdl-cell--3-col" *ngFor="#component of entities">
                 <div class="demo-card-square mdl-card mdl-shadow--2dp">
                     <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">ShiftRegister</h2>
+                        <h2 class="mdl-card__title-text">{{component.name}}</h2>
                     </div>
                     <div class="mdl-card__supporting-text  mdl-card--expand">
-                        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-                            <thead>
-                                <tr>
-                                    <th class="mdl-data-table__cell--non-numeric">Port</th>
-                                    <th>Connection</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">Acrylic</td>
-                                    <td>25</td>
-                                </tr>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">Plywood</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">Laminate</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">Laminate</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">Laminate</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">Laminate</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">Laminate</td>
-                                    <td>10</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                                        <thead>
+                                            <tr>
+                                                <th class="mdl-data-table__cell--non-numeric">Ports</th>
+                                                <th>Connection</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="#componentmap of component.ports;">
+                                                <td class="mdl-data-table__cell--non-numeric">{{componentmap.name}} : {{componentmap.direction}} ({{componentmap.width}})</td>
+                                                <td >{{componentmap.relation}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
                         <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                             View Modules
                         </a>
                         <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                        <i class="material-icons">edit</i>
+                            <i class="material-icons">edit</i>
                         </button>
-                    </div>
-                </div>
-            </div>
-            <div class="mdl-cell mdl-cell--3-col">
-                <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title mdl-card--expand">
-                        <h2 class="mdl-card__title-text">Update</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Aenan convallis.
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            View Updates
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="mdl-cell mdl-cell--3-col">
-                <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title mdl-card--expand">
-                        <h2 class="mdl-card__title-text">Update</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Aenan convallis.
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            View Updates
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="mdl-cell mdl-cell--3-col">
-                
-                <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title mdl-card--expand">
-                        <h2 class="mdl-card__title-text">Update</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Aenan convallis.
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            View Updates
-                        </a>
                     </div>
                 </div>
             </div>
