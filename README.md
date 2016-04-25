@@ -1,6 +1,7 @@
-# Stencil
+# VHDL Code Generator
 
-A horribly simple starter template for all your Angular2 frontend development
+
+Created using [Stencil](https://github.com/rixrix/stencil) starter template for Angular 2
 
 ## Technologies
 
@@ -14,8 +15,8 @@ A horribly simple starter template for all your Angular2 frontend development
 Make sure you already have NodeJS and Git installed, then
 
 ```
-$ git clone https://github.com/rixrix/stencil.git
-$ cd </path/to/stencil/cloned/folder>
+$ git clone https://github.com/francosioquim/vhdl-code-generator.git
+$ cd </path/to/cloned/folder>
 $ npm install
 ```
 
