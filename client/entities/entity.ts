@@ -1,8 +1,9 @@
 import {Port} from './port';
 
 export class Entity {
-	name: string;
+	name: string;	
 	architecture: string;
 	parent_name: string;
-	ports: Port[];
+	level: number;
+	ports: Port[]; 
 }

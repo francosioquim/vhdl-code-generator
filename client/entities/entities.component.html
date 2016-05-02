@@ -2,8 +2,11 @@
     <div class="page-content">
         <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--12-col" [hidden]="showControlPanel">
-                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored left" (click)="toggleControlPanel()">
-                    <i class="material-icons">add</i>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent right-20" (click)="toggleControlPanel()">
+                    Add New Entity
+                </button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent right-20" (click)="actionButton()">
+                    Action
                 </button>
             </div>
             <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" [hidden]="!showControlPanel">
@@ -38,9 +41,12 @@
                                         <input type="number" class="mdl-textfield__input" [(ngModel)]="port.width" value="1">
                                         <label class="mdl-textfield__label" for="sample3">Bus</label>
                                     </div>
-                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-20">
-                                        <input type="text" class="mdl-textfield__input" [(ngModel)]="port.direction" value="1">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-20">             
+                                        <select [(ngModel)]="port.direction" class="mdl-textfield__input">
+                                            <option *ngFor="#portdirection of portDirections" [value]="portdirection">{{portdirection}}</option>
+                                        </select>
                                         <label class="mdl-textfield__label" for="sample3">Direction</label>
+            
                                     </div>
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-20">
                                         <input type="text" class="mdl-textfield__input" [(ngModel)]="port.relation" value="1">

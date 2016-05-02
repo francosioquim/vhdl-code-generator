@@ -13,75 +13,77 @@ declare var componentHandler: any;
 
 export class EntitiesComponent implements OnInit, AfterViewInit {
 	port: Port;
-  entity: Entity;
-  pageTitle: string;
-  entities = [];
-  portDirections = ['In', 'Out', 'InOut'];
+	entity: Entity;
 
+	entities: Entity[] = [];
+
+	portDirections = ['In', 'Out', 'InOut'];
 	showControlPanel: boolean;
+	pageTitle: string;
 
-  constructor(
+	constructor(
 		private renderer: Renderer,
-	  private _router: Router,
-	  private _entitiesService: EntitiesService) { 
-  }
+		private _router: Router,
+		private _entitiesService: EntitiesService) {
+	}
 
-  ngOnInit() {
+	ngOnInit() {
 		this.pageTitle = 'VHDL Code Generator';
 		this.showControlPanel = false;
-
 		this.clearPort();
 		this.clearEntity();
-		console.log(this.port);
-		console.log(this.entity);
-  }
+	}
 
-  createEntity() {
+	createEntity() {
 		this.toggleControlPanel();
-		this.entities.push(this.entity);
-		console.log(this.entities);
+		this._entitiesService.addEntity(this.entity).then(entities => this.entities = entities);
 		this.clearPort();
 		this.clearEntity();
-		// this.entities = [{ "name": "hooo" }];
-  }
+	}
 
-  clearEntity() {
+	addPort() {
+		this.entity.ports.push(this.port);
+		this.clearPort();
+	}
+
+	countPorts() {
+		var portCount = Object.keys(this.entity.ports);
+		return portCount.length;
+	}
+
+	clearEntity() {
 		this.entity = {
 			name: "",
 			architecture: "",
 			parent_name: "",
+			level: 0,
 			ports: []
 		};
-  }
+	}
 
-  addPort() {
-		this.entity.ports.push(this.port);
-		console.log(this.entity.ports);
-		this.clearPort();
-  }
-
-  countPorts() {
-		var portCount = Object.keys(this.entity.ports);
-		return portCount.length;
-  }
-
-  clearPort() {
+	clearPort() {
 		this.port = {
 			name: "",
 			width: 1,
 			direction: "",
 			relation: ""
 		};
-  }
+	}
 
 
-  toggleControlPanel() {
-    this.showControlPanel = !this.showControlPanel;
-  }
+
+	actionButton() {
+		console.log('Action Execute');
+	}
+
+	toggleControlPanel() {
+		this.showControlPanel = !this.showControlPanel;
+	}
 
 	ngAfterViewInit() {
 		componentHandler.upgradeAllRegistered();
 	}
+
   /*
   getPort() {
 		this._entitiesService.getPort().then(
