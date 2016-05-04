@@ -17,7 +17,9 @@ export class EntitiesComponent implements OnInit, AfterViewInit {
 
 	entities: Entity[] = [];
 
-	portDirections = ['In', 'Out', 'InOut'];
+	portDirections = [];
+	portConnections = [];
+
 	showControlPanel: boolean;
 	pageTitle: string;
 
@@ -32,6 +34,20 @@ export class EntitiesComponent implements OnInit, AfterViewInit {
 		this.showControlPanel = false;
 		this.clearPort();
 		this.clearEntity();
+		this.portConnections = this.getAvailablePorts("In", 0);
+		this.portDirections = ['In', 'Out', 'InOut'];
+	}
+
+	getAvailablePorts(direction: string, level: number) {
+		var samplePorts: Port[] = [
+			{ "name": "clk1", "width": 1, "direction": "In", "relation": "clk50" },
+			{ "name": "clk2", "width": 1, "direction": "In", "relation": "clk25" },
+			{ "name": "rst", "width": 1, "direction": "In", "relation": "clk25" },
+			{ "name": "din", "width": 8, "direction": "In", "relation": "" },
+			{ "name": "dout", "width": 8, "direction": "Out", "relation": "" },
+			{ "name": "dinout", "width": 8, "direction": "InOut", "relation": "" },
+		];
+		return samplePorts;
 	}
 
 	createEntity() {
@@ -70,10 +86,8 @@ export class EntitiesComponent implements OnInit, AfterViewInit {
 		};
 	}
 
-
-
 	actionButton() {
-		console.log('Action Execute');
+		console.log(this.entities);
 	}
 
 	toggleControlPanel() {
