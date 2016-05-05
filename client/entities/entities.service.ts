@@ -24,6 +24,14 @@ export class EntitiesService {
 		});
 	}
 
+	deleteEntitybyName(entityName: string) {
+		for (var i = this.entities.length - 1; i >= 0; i--) {
+			if (this.entities[i].name == entityName) {
+				this.entities.splice(i, 1);
+			}
+		}
+	}
+
 	getEntity() {
 		return Promise.resolve(this.entity);
 	}

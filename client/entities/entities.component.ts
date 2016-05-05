@@ -59,7 +59,7 @@ export class EntitiesComponent implements OnInit, AfterViewInit {
 	}
 
 	deleteEntity(entityName: string) {
-		console.log('delete Entity' + entityName);
+		this._entitiesService.deleteEntitybyName(entityName);
 	}
 
 	getAvailablePorts(direction: string, level: number) {
