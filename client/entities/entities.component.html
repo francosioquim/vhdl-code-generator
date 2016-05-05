@@ -82,8 +82,11 @@
                             </div>
                         </div>
                         <div class="mdl-layout-spacer"></div>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent right-20" (click)="createEntity()">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent right-20" (click)="createEntity()"  *ngIf="!editMode">
                             Create Entity
+                        </button>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent right-20" (click)="updateEntity()"  *ngIf="editMode">
+                            Update
                         </button>
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="toggleControlPanel()">
                             Cancel
@@ -118,7 +121,10 @@
                         <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                             View Modules
                         </a>
-                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" (click)="deleteEntity(component.name)">
+                            <i class="material-icons">delete</i>
+                        </button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"(click)="editEntity(component.name)">
                             <i class="material-icons">edit</i>
                         </button>
                     </div>

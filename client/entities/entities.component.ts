@@ -21,6 +21,7 @@ export class EntitiesComponent implements OnInit, AfterViewInit {
 	portConnections = [];
 
 	showControlPanel: boolean;
+	editMode: boolean;
 	pageTitle: string;
 
 	constructor(
@@ -32,10 +33,33 @@ export class EntitiesComponent implements OnInit, AfterViewInit {
 	ngOnInit() {
 		this.pageTitle = 'VHDL Code Generator';
 		this.showControlPanel = false;
+		this.editMode = false;
 		this.clearPort();
 		this.clearEntity();
 		this.portConnections = this.getAvailablePorts("In", 0);
 		this.portDirections = ['In', 'Out', 'InOut'];
+	}
+
+	createEntity() {
+		this.toggleControlPanel();
+		this._entitiesService.addEntity(this.entity).then(entities => this.entities = entities);
+		this.clearEntity();
+		this.clearPort();
+	}
+
+	updateEntity() {
+		this._entitiesService.updateEntity(this.entity);
+		this.toggleControlPanel();
+	}
+
+	editEntity(entityName: string) {
+		this.editMode = true;
+		this.entity = this._entitiesService.getEntitybyName(entityName);
+		this.toggleControlPanel();
+	}
+
+	deleteEntity(entityName: string) {
+		console.log('delete Entity' + entityName);
 	}
 
 	getAvailablePorts(direction: string, level: number) {
@@ -48,13 +72,6 @@ export class EntitiesComponent implements OnInit, AfterViewInit {
 			{ "name": "dinout", "width": 8, "direction": "InOut", "relation": "" },
 		];
 		return samplePorts;
-	}
-
-	createEntity() {
-		this.toggleControlPanel();
-		this._entitiesService.addEntity(this.entity).then(entities => this.entities = entities);
-		this.clearPort();
-		this.clearEntity();
 	}
 
 	addPort() {

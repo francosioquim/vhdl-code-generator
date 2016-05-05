@@ -16,6 +16,14 @@ export class EntitiesService {
 		return Promise.resolve(this.entities);
 	}
 
+	updateEntity(entityInput: Entity) {
+		this.entities.forEach(function(entityData) {
+			if (entityData.name == entityInput.name) {
+				entityData = entityInput;
+			}
+		});
+	}
+
 	getEntity() {
 		return Promise.resolve(this.entity);
 	}
@@ -24,8 +32,18 @@ export class EntitiesService {
 		return Promise.resolve(this.entities);
 	}
 
+	getEntitybyName(entityName: string) {
+		var returnData = this.clearEntity();
+		this.entities.forEach(function(entityData) {
+			if (entityData.name == entityName) {
+				returnData = entityData;
+			}
+		});
+		return returnData;
+	}
+
 	clearEntity() {
-		this.entity = {
+		return this.entity = {
 			name: "",
 			architecture: "",
 			parent_name: "",
