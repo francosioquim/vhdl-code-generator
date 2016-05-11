@@ -9,7 +9,7 @@
                     Action
                 </button>
             </div>
-            <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" [hidden]="!showControlPanel">
+            <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid  control-panel" [hidden]="!showControlPanel">
                 <div class="mdl-cell mdl-cell--12-col">
                     <form action="#">
                         <div class="mdl-grid">
@@ -99,7 +99,7 @@
             <div class="mdl-cell mdl-cell--3-col" *ngFor="#component of entities">
                 <div class="demo-card-square mdl-card mdl-shadow--2dp">
                     <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">{{component.name}}</h2>
+                        <h2 class="mdl-card__title-text">{{component.name}} <span *ngIf="component.architecture"> ({{component.architecture}})</span></h2>
                     </div>
                     <div class="mdl-card__supporting-text  mdl-card--expand">
                          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">

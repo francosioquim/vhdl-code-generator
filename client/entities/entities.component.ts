@@ -38,6 +38,7 @@ export class EntitiesComponent implements OnInit, AfterViewInit {
 		this.clearEntity();
 		this.portConnections = this.getAvailablePorts("In", 0);
 		this.portDirections = ['In', 'Out', 'InOut'];
+		this._entitiesService.getEntities().then(entities => this.entities = entities);
 	}
 
 	createEntity() {
